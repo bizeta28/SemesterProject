@@ -1,0 +1,12 @@
+# Conda environment for this project.
+# ehubx itself is NOT listed here: it is installed from a local clone of
+# https://github.com/uesl-empa/ehubx (see README, "Setup").
+name: sp
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - poetry
+  - pytest
+  - ipykernel

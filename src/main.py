@@ -2,9 +2,9 @@
 
 Usage (from the repository root):
 
-    python src/run_case.py <case_name>            # e.g. python src/run_case.py 1_WH
-    python src/run_case.py <case_name> --inspect  # parse + build only, no solve
-    python src/run_case.py --list                 # list available cases
+    python src/main.py <case_name>            # e.g. python src/main.py 1_WH
+    python src/main.py <case_name> --inspect  # parse + build only, no solve
+    python src/main.py --list                 # list available cases
 
 A case is a folder ``cases/<case_name>/`` that contains
 

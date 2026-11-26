@@ -5,16 +5,16 @@ Empa UESL). An energy hub optimisation model, built with
 [ehubX](https://github.com/uesl-empa/ehubx), of buildings with decentralised
 (edge) data centres.
 
-**Research question.** How much seasonal heat-demand flexibility can
+**Research question.** How much heat-demand flexibility can
 coordinated data-centre waste-heat recovery unlock across a multi-building
 portfolio, and how does it depend on the type of computational workload?
 
 1. How do workload types differ in temporal profile, deferrability, and the
    amount and temperature of recoverable heat?
-2. How much heat-demand flexibility does each workload type provide across
-   seasons and demand profiles, and which provides the best fit?
-3. How does the workload–demand match change the electrical load seen by the
-   grid?
+2. How much flexibility does each workload type provide, and which provides the best fit?
+
+3. How does the flexibility from shifting workloads between data centres in different buildings
+ (spatial) compare with shifting them in time (temporal), and are they complementary?
 
 ## Repository layout
 
@@ -26,7 +26,7 @@ SemesterProject/
     <case>/results/   one timestamped folder per run (git-ignored)
   data/raw/           each input profile once, with provenance (data/README.md)
   src/
-    run_case.py       the ONLY entry point
+    main.py       the ONLY entry point
     prep.py           data/raw -> ehubx CSVs
     kpis.py           KPIs from a results folder
     plotting.py       figures from results
@@ -80,10 +80,10 @@ with `pip install gurobipy` is not enough for 8760-hour cases.
 From the repository root:
 
 ```powershell
-python src/run_case.py --list              # available cases
-python src/run_case.py _smoke --inspect    # parse + build only (fast check)
-python src/run_case.py _smoke              # full run
-pytest tests/                              # fast checks
+python src/main.py --list              # available cases
+python src/main.py _smoke --inspect    # parse + build only (fast check)
+python src/main.py _smoke              # full run
+pytest tests/                          # fast checks
 ```
 
 ## Outputs

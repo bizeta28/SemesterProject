@@ -1,7 +1,7 @@
 # Cases
 
 One folder per ehubx model. Each case is complete on its own and can be run
-with `python src/run_case.py <case_name>`.
+with `python src/main.py <case_name>`.
 
 ```text
 cases/<case_name>/

@@ -1,0 +1,81 @@
+- stages: S1
+  hubs: [H2, H6, H7, H8]
+  ec: E0
+  profile_path: profiles/imports.csv
+
+- stages: S1
+  hubs: H1
+  ec: E1
+  price: 10 CHF/kWh
+  co2: 3 kg/kWh
+
+- stages: S1
+  hubs: H3
+  ec: E3
+
+- stages: S1
+  hubs: H5
+  ec: E0
+  max: 5 kW
+
+- stages: S1
+  hubs: H10
+  ec: E0
+  co2: 3 kg/kWh
+
+- stages: S1
+  hubs: H10
+  ec: E10
+  price: 10 CHF/kWh
+
+- stages: S1
+  hubs: H11
+  ec: E11
+  price: 10 CHF/kWh
+  co2: 3 kg/kWh
+
+- stages: S1
+  hubs: H12
+  ec: E12a
+  price: 10 CHF/kWh
+  co2: 3 kg/kWh
+
+- stages: S1
+  hubs: H12
+  ec: E12b
+  price: 10 CHF/kWh
+  co2: 3 kg/kWh
+
+- stages: S1
+  hubs: H13
+  ec: E13a
+  price: 10 CHF/kWh
+  co2: 3 kg/kWh
+
+- stages: S1
+  hubs: H13
+  ec: E13b
+  price: 10 CHF/kWh
+  co2: 3 kg/kWh
+
+- stages: S1
+  hubs: H13
+  ec: E13d
+  price: 10 CHF/kWh
+  co2: 3 kg/kWh
+
+- stages: S1
+  hubs: H14
+  ec: E0
+  price: 10 CHF/kWh
+  co2: 3 kg/kWh
+
+- stages: S1
+  hubs: H15
+  ec: E0
+  price: 10 CHF/kWh
+
+- stages: S1
+  hubs: H16
+  ec: E0
+  price: 10 CHF/kWh

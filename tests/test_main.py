@@ -11,25 +11,25 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 import main  # noqa: E402
+from scenarios import SCENARIOS  # noqa: E402
 
 
 def test_smoke_case_is_listed():
     assert "_smoke" in main.list_cases()
 
 
-def test_case_settings_fill_defaults():
-    settings = main.load_case_settings(main.CASES_DIR / "_smoke")
-    assert settings["objective"] == "cost"
-    assert set(settings) == set(main.DEFAULT_SETTINGS)
+def test_every_scenario_has_label_and_apply():
+    assert "base" in SCENARIOS
+    for name, scenario in SCENARIOS.items():
+        assert scenario["label"], f"scenario {name} has no label"
+        assert callable(scenario["apply"]), f"scenario {name} has no apply()"
 
 
-def test_unknown_case_setting_is_rejected(tmp_path):
-    (tmp_path / "case.yaml").write_text("objectiv: cost\n")  # typo on purpose
-    with pytest.raises(ValueError, match="Unknown keys"):
-        main.load_case_settings(tmp_path)
+def test_unknown_scenario_is_rejected():
+    with pytest.raises(ValueError, match="Unknown scenario"):
+        main.run_case("_smoke", scenario="does_not_exist", inspect_only=True)
 
 
 def test_smoke_case_parses_and_builds():
     """ehubx is installed and the smoke case is a valid model (no solve)."""
-    pytest.importorskip("ehubx")
     assert main.run_case("_smoke", inspect_only=True) is None

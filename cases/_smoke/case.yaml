@@ -1,4 +1,0 @@
-description: >
-  Installation smoke test. Unmodified copy of ehubx examples/small_demo
-  (uesl-empa/ehubx @ d436c9b, GPL-3.0). Not part of the analysis.
-solver: gurobi

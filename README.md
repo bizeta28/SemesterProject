@@ -22,11 +22,11 @@ portfolio, and how does it depend on the type of computational workload?
 SemesterProject/
   cases/              one complete ehubx model per folder (see cases/README.md)
     <case>/inputs/    ehubx inputs: basic/ network/ renewables/
-    <case>/case.yaml  run settings for that case
     <case>/results/   one timestamped folder per run (git-ignored)
   data/raw/           each input profile once, with provenance (data/README.md)
   src/
-    main.py       the ONLY entry point
+    main.py           the ONLY entry point; run settings + solver live here
+    scenarios.py      named changes applied to a case after parsing
     prep.py           data/raw -> ehubx CSVs
     kpis.py           KPIs from a results folder
     plotting.py       figures from results
@@ -80,10 +80,11 @@ with `pip install gurobipy` is not enough for 8760-hour cases.
 From the repository root:
 
 ```powershell
-python src/main.py --list              # available cases
-python src/main.py _smoke --inspect    # parse + build only (fast check)
-python src/main.py _smoke              # full run
-pytest tests/                          # fast checks
+python src/main.py --list                         # cases and scenarios
+python src/main.py _smoke --inspect               # parse + build only (fast check)
+python src/main.py _smoke                         # full run, base scenario
+python src/main.py <case> --scenario <name>       # run a scenario from scenarios.py
+pytest tests/                                     # fast checks
 ```
 
 ## Outputs
@@ -91,10 +92,11 @@ pytest tests/                          # fast checks
 Each run writes to a fresh folder, so nothing is ever overwritten:
 
 ```text
-cases/<case>/results/<YYYY-MM-DD_HH-MM-SS>/
+cases/<case>/results/<scenario>_<YYYY-MM-DD_HH-MM-SS>/
   opt_vars.csv, import_export*.csv, ...   ehubX result files
   run_metadata.json                       ehubX commit, Python and Gurobi
-                                          versions, case settings used
+                                          versions, scenario, run settings
+cases/<case>/model.lp                     LP file of the last run (git-ignored)
 ```
 
 **Source of truth for reported numbers:** the ehubX result files of the run
@@ -115,8 +117,16 @@ A semester-project implementation, not a general framework. It focuses on:
 - workload-type IT flexibility and its effect on heat and electricity flows;
 - KPIs and figures that answer the three research questions.
 
-It deliberately avoids generating ehubX inputs from templates, a scenario
-framework, and modifying the ehubX source.
+Where the numbers live:
+
+- **Model parameters** (costs, efficiencies, capacities, profiles) live only
+  in each case's hand-written YAML/CSV inputs. They are never generated from
+  templates and never duplicated in Python.
+- **Run settings** (objective, solver and its options) live in `src/main.py`,
+  as in the ehubX docs' main file.
+- **Scenarios** in `src/scenarios.py` hold only what differs from a case's
+  inputs, applied after parsing through the ehubX setters.
+- The ehubX source is never modified.
 
 ## Licence
 
